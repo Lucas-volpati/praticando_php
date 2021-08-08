@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+
+
+/*  PÁGINA DE LOGIN  */
+
+body {
+	font-family: 'Roboto', sans-serif;
+	background-image: url('../img/pais3.jpg');
+}
+
+.link a {
+	text-decoration: none;
+	color: #16A0B6;
+	font-weight: 700;
+}
+
+.login {
+	background-color: #fff;
+	max-width: 350px;
+	margin: auto;
+	margin-top: 100px;
+	box-shadow: 0px 0px 5px #ccc;
+	padding: 30px 15px 30px 30px;
+}
+
+.cadastro {
+	background-color: #fff;
+	max-width: 350px;
+	margin: auto;
+	margin-top: 50px;
+	box-shadow: 0px 0px 5px #ccc;
+	padding: 30px 15px 30px 30px;
+}
+
+.img-login {
+	text-align: center;
+	font-size: 50px;
+	padding: 20px 0 20px 0;
+}
+
+.img-login i {
+	border: 2px solid #aaa;
+	border-radius: 50%;
+	padding: 35px;
+	color: #aaa;
+}
+
+.form-login {
+	text-align: center;
+
+}
+
+.form-login h1 {
+	font-size: 25px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+
+}
+
+.content-form {
+	padding-right: 20px;
+}
+
+#campo {
+	padding: 10px;
+	border-radius: 0;
+	border: 0;
+	outline: none;
+	width: 100%;
+	background-color: #ddd; 
+}
+
+.tilt {
+	display: block;
+	text-align: left;
+	padding: 15px 0 10px 0;
+	color: #444;
+}
+
+.btn {
+	margin-top: 40px;
+	width: 100%;
+	padding: 10px 0 10px 0;
+	border:0;
+	color: #fff;
+	background-color: #444; 
+	transition: all 0.5s; 
+}
+
+.btn-back {
+	margin-top: 10px;
+	width: 100%;
+	padding: 10px 0 10px 0;
+	border:0;
+	color: #fff;
+	font-size: 12px;
+	background-color: #444; 
+	transition: all 0.5s; 
+}
+
+.btn-back a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: 100;
+}
+
+.btn:hover, .btn-back:hover {
+	background: #222;
+	cursor: pointer;
+}
+
+
+
+
+/* FORMULARIO */
+
+.formulario {
+	background-color: #333;
+}
+
+.form-items {
+	padding: 20px;
+}
+
+.form-items label {
+	display: block;
+	color: #fff;
+}
+
+.form-items input, textarea {
+	width: 100%;
+	border: none;
+	border-bottom: 2px solid #000;
+	padding: 10px;
+	background: transparent;
+	color: #fff;
+	font-size: 16px;
+	transition: all ,3s ease-out;
+
+}
+
+.form-items textarea {
+	resize: none;
+}
+
+.form-items input:focus, textarea:focus {
+	border: none;
+	outline: none;
+	border-bottom: 2px solid #000;
+}
+
+
+/* MENSAGENS DE ERRO E SUCESSO */
+
+div#msg-sucesso {
+
+	width: 370px;
+	margin:10px auto;
+	padding: 10px;
+	background-color: rgba(50, 205, 50, 0.2);
+	border: 1px solid rgb(34, 139, 34);
+	color: #fff;
+}
+
+div.msg-erro {
+
+	width: 370px;
+	margin:10px auto;
+	padding: 10px;
+	background-color: rgba(250, 128, 144, 0.2);
+	border: 1px solid rgb(165, 42, 42);
+	color: #fff;
+}
