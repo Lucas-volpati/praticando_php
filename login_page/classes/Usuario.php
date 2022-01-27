@@ -37,7 +37,7 @@ class Usuario {
 			$sql->bindValue(":n", $nome);
 			$sql->bindValue(":t", $telefone);
 			$sql->bindValue(":e", $email);
-			$sql->bindValue(":s", md5($senha));
+			$sql->bindValue(":s", password_hash($senha, PASSWORD_DEFAULT));
 
 			$sql->execute();
 
@@ -51,25 +51,22 @@ class Usuario {
 
 		//verificar se email e senha estão cadastrados
 
-		$sql = $pdo->prepare("SELECT id_usuario FROM usuarios WHERE email = :e AND senha = :s");
+		$sql = $pdo->prepare("SELECT id_usuario, senha FROM usuarios WHERE email = :e");
 
 		$sql->bindValue(":e", $email);
-		$sql->bindValue(":s", md5($senha));
 		$sql->execute();
 
 		if($sql->rowCount() > 0) {
 			//se estiver cadastrado.
-			$dado = $sql->fetch();
 
-			session_start();
+			$dado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-			$_SESSION['id_usuario'] = $dado['id_usuario'];
-			return true;//cadastrado com sucesso
+			if (password_verify($senha, $dado["senha"])) {
 
-		}else {
+				session_start();
 
-			return false;
-
+				$_SESSION['id_usuario'] = $dado['id_usuario'];
+			}
 		}
 	}
 

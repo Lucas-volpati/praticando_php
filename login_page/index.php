@@ -27,7 +27,7 @@ $user = new Usuario();
 
 		<div class="content-form">
 			
-			<form class="form-login" method="post">
+			<form class="form-login" method="post" novalidate>
 				
 				<div class="img-login">
 					
@@ -57,55 +57,29 @@ $user = new Usuario();
 		
 	</section>
 <?php
-if (isset($_POST['login'])) 
-{
 
-	$email = addslashes($_POST['login']);
-	$senha = addslashes($_POST['senha']);
+	$formData = filter_input(INPUT_POST, FILTER_DEFAULT);
 
-	//verificar se está vazio.
+	$filteredEmail = htmlspecialchars($formData["email"], ENT_QUOTES, 'UTF-8');
+	$filteredPasswd = htmlspecialchars($formData["senha"], ENT_QUOTES, 'UTF-8');
 
-	if (!empty($email) && !empty($senha)) {
+	// Validações dos dados recebidos!
 
-		$user->conectar("projeto_login", "localhost", "root", "Adm1805?");
+	if ($formData) {
+		if (in_array("", $formData)) {
+			echo "<p class='msg-erro'>Erro: Preencher todos os campos!</p>";
+		}else if(!filter_var($filteredEmail, FILTER_VALIDATE_EMAIL)) {
+			echo "<p class='msg-erro'>Erro: E-mail inválido!</p>";
+		}else {
+			$user->conectar("projeto_login", "localhost", "myUser", "myPasswd");
 
-		if($user->msgErro == "") {
-			if ($user->logar($email, $senha)) 
-			{
-
+			if ($user->logar($filteredEmail, $filteredPasswd)) {
 				header("location:AreaPrivada.php");
-
-			}else 
-			{
-				?>
-
-					<div class="msg-erro">
-						Email ou senha incorretos!
-					</div>
-				<?php
-				
-				
+			}else {
+				echo "<p class='msg-erro'>Erro: E-mail ou senha incorretos, favor verificar!</p>";
 			}
-		}else 
-		{
-
-			echo "Erro: " . $user->msgErro;
 		}
-	
-	}else 
-	{
-		?>
-
-			<div class="msg-erro">
-				Preencha todos os campos!
-			</div>
-		<?php
-		
-	
-	
 	}
-}
-
 
 ?>
 </body>
