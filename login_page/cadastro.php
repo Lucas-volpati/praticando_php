@@ -1,7 +1,7 @@
 <?php 
 require_once 'classes/Usuario.php';
 
-$u = new Usuario();
+$user = new Usuario();
 
 ?>
 <html lang="pt-br">
@@ -16,8 +16,6 @@ $u = new Usuario();
 
 	<title>Tela de login</title>
 
-
-
 </head>
 
 <body>
@@ -26,9 +24,7 @@ $u = new Usuario();
 
 		<div class="content-form">
 			
-			<form class="form-login" method="post">
-				
-				
+			<form class="form-login" method="post" novalidate>
 
 				<h1>Painel de Controle - Cadastro</h1>
 
@@ -47,13 +43,8 @@ $u = new Usuario();
 				<label class="tilt pin">Confirmar Senha</label>
 				<input type="password" name="conf-senha" id="campo" required="">
 
-
 				<input type="submit" name="entrar" value="Cadastrar" class="btn">
 				<a href="index.php"><div class="btn-back"><strong>Voltar</strong></div></a>
-
-
-			
-
 
 			</form>
 
@@ -62,71 +53,30 @@ $u = new Usuario();
 	</section>
 
 <?php
-//verificar se clicou no botao
-if (isset($_POST['nome'])) {
 
-	$nome = addslashes($_POST['nome']);
-	$telefone = addslashes($_POST['telefone']);
-	$email = addslashes($_POST['email']);
-	$senha = addslashes($_POST['senha']);
-	$confirmacao = addslashes($_POST['conf-senha']);
+$dataForm = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+$filteredEmail = htmlspecialchars($dataForm["email"]);
 
-	//verificar se está vazio.
-
-	if (!empty($nome) && !empty($telefone) && !empty($email) && !empty($senha) && !empty($confirmacao)) {
-
-		$u->conectar("projeto_login", "localhost", "root", "Adm1805?");
-
-		if($senha == $confirmacao) {
-
-			if ($u->cadastrar($nome, $telefone, $email, $senha)) {
-				?>
-
-				<div id="msg-sucesso">
-					Cadastrado com sucesso!
-				</div>
-				<?php
-			}else {
-
-				?>
-
-				<div class="msg-erro">
-					Email já cadastrado!
-				</div>
-				<?php
-				
-			}
-
-		}else {
-
-				?>
-
-				<div class="msg-erro">
-					As senhas não conferem!
-				</div>
-				<?php
-
-		}
-
-		
+if ($dataForm) {
+	if (in_array("", $dataForm)) { //Verificando preenchimento dos dados
+		echo "<p class='msg-erro'>Erro: Preencher todos os campos!</p>";
+	}else if(!filter_var($filteredEmail, FILTER_VALIDATE_EMAIL)) {//Validação do e-mail
+		echo "<p class='msg-erro'>Erro: E-mail inválido!</p>";
+	}else if($dataForm["senha"] !== $dataForm["conf-senha"]) {//Verificação da confirmação das senhas
+		echo "<p class='msg-erro'>Erro: As senhas precisam ser iguais!</p>";
 	}else {
+		$user->conectar("projeto_login", "localhost", "myUser", "myPasswd");
 
-		?>
-
-		<div class="msg-erro">
-			Preencha todos os campos!
-		</div>
-		<?php
+		if ($u->cadastrar($nome, $telefone, $email, $senha)) {//realizar cadastro
+			echo "<p class='msg-accept'>Cadastro realizado com sucesso!</p>";
+		}else {
+			echo "<p class='msg-erro'>Erro: Usuário já cadastrado!</p>";
+		}
 	}
 }
+
 
 ?>
 
 </body>
-
-
-
-
-
-
 </html> 
