@@ -8,7 +8,7 @@ class Sql extends PDO {
 	
 	public function __construct() {
 
-		$this->conn = new PDO("mysql:host=localhost;dbname=dbphp7", "root", "Adm1805?"); 
+		$this->conn = new PDO("mysql:host=localhost;dbname=dbphp7", "myUser", "myPasswd"); 
 
 
 	}
@@ -29,7 +29,7 @@ class Sql extends PDO {
 	}
 
 	//Método que cria o comando a ser inserido no banco de dados.
-	public function query($rowQuery, $params = array()) {
+	public function myQuery($rowQuery, $params = array()) {
 
 		$stmt = $this->conn->prepare($rowQuery);
 
@@ -44,7 +44,7 @@ class Sql extends PDO {
 	//Método que chama o 'SELECT' no banco de dados onde em $rowQuery é informado o comando de fato 'SELECT * FROM...' e em $params são passados os parametros do 'WHERE', ex ':ID'.
 	public function select($rowQuery, $params = array()):array {
 
-		$stmt = $this->query($rowQuery, $params);
+		$stmt = $this->myQuery($rowQuery, $params);
 
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 

@@ -29,10 +29,10 @@ require_once ("Config.php");
 //echo json_encode($search);
 
 
-/* CARREGA UM USUARIO DESDE QUE LOGIN E SENAH ESTEJAM CORRETOS */
+/* CARREGA UM USUARIO DESDE QUE LOGIN E SENHA ESTEJAM CORRETOS */
 
 $usuario = new Usuario();
 
-$usuario->dados("Fox", "@#@#$");
+$usuario->dados("nome", "senha");
 
 echo ($usuario);
