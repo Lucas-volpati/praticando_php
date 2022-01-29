@@ -18,11 +18,11 @@ if($cpf == 00000000000
 		|| $cpf == 88888888888
 		|| $cpf == 99999999999) {
 
-	echo "Favor inserir CPF válido!";
+	echo "<p class='msgError'>Favor inserir CPF válido!</p>";
 
 }elseif(strlen($cpf) < 11) {
 
-	echo "Insira todos os dígitos !";
+	echo "<p class='msgError'>Insira todos os dígitos !</p>";
 
 }else {
 
@@ -60,7 +60,7 @@ if($cpf == 00000000000
 		$firstVerified = 0;
 		
 	}else {
-		echo "CPF inválido !";
+		echo "<p class='msgError'>CPF inválido !</p>";
 	}
 
 	
@@ -93,7 +93,7 @@ if($cpf == 00000000000
 		$secondVerified = 0;
 	
 	}else {
-		echo "CPF inválido !";
+		echo "<p class='msgError'>CPF inválido !</p>";
 	}
 	
 
@@ -104,10 +104,10 @@ if($cpf == 00000000000
 
 	if ($lastDigits == $verifyDigits) {
 		
-		echo "O CPF é válido";
+		echo "<p class='okMsg'>O CPF é válido</p>";
 		
 	}else {
-		echo "CPF inválido, verifique e tente novamente!";
+		echo "<p class='msgError'>CPF inválido, verifique e tente novamente!</p>";
 	}
 	
 }
